@@ -98,10 +98,12 @@
             Я = new Button();
             BackSpaceButton = new Button();
             С = new Button();
+            pictureBox1 = new PictureBox();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -943,11 +945,23 @@
             С.UseVisualStyleBackColor = true;
             С.Click += Button_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(472, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(20, 20);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(504, 543);
+            Controls.Add(pictureBox1);
             Controls.Add(tableLayoutPanel5);
             Controls.Add(tableLayoutPanel4);
             Controls.Add(tableLayoutPanel3);
@@ -964,6 +978,7 @@
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1038,5 +1053,6 @@
         private Button BackSpaceButton;
         private Button С;
         private Button EnterButton;
+        private PictureBox pictureBox1;
     }
 }

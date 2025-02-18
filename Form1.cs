@@ -249,7 +249,7 @@ namespace WordGuessGame
         {
             if (currentWord == secretWord)
             {
-                SoundPlayer player = new SoundPlayer(@"Data\tada.wav");
+                SoundPlayer player = new SoundPlayer(@"Data\Win.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"Вы угадали слово {currentWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
@@ -257,7 +257,7 @@ namespace WordGuessGame
             }
             if (count == 7)
             {
-                SoundPlayer player = new SoundPlayer(@"Data\spongebob-fail.wav");
+                SoundPlayer player = new SoundPlayer(@"Data\Lose.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
@@ -268,7 +268,7 @@ namespace WordGuessGame
 
         private void InitializeNewGame()
         {
-            SoundPlayer player = new SoundPlayer(@"Data\newGame.wav");
+            SoundPlayer player = new SoundPlayer(@"Data\NewGame.wav");
             player.Play();
             Words words = new Words();
             secretWord = words.GetWord();
@@ -368,6 +368,11 @@ namespace WordGuessGame
             Ь.BackColor = Color.LightGray;
             Б.BackColor = Color.LightGray;
             Ю.BackColor = Color.LightGray;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Игра «5 букв» или Вордли (от англ. Wordle) – интеллектуальная игра на угадывание существительных из пяти букв за 6 попыток. Игра развивает словарный запас и логику.\nПервоначальную версию игры придумал в 2021 программист Джош Уордл (Josh Wardle), который обожал играть в слова со своей семьей. Игра быстро стала сенсацией. А в мае 2022 году банк Тинькофф запустил версию игры у себя в приложении, где за угадывание слова пользователи получают призы и кешбэк.", "Информация о игре");
         }
     }
 }
