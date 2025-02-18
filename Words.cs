@@ -10,9 +10,9 @@ namespace WordGuessGame
 
         public string GetWord()
         {
-            string filePath = Path.Combine(Application.StartupPath, "words.db");
+            //string filePath = Path.Combine(Application.StartupPath, "words.db");
 
-            using (StreamReader sr = new StreamReader(filePath, Encoding.UTF8))
+            using (StreamReader sr = new StreamReader(@"Data\words.db", Encoding.UTF8))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\words.db" />
     <None Remove="newGame.wav" />
     <None Remove="spongebob-fail.wav" />
     <None Remove="tada.wav" />
@@ -17,13 +18,16 @@
 
   <ItemGroup>
     <Content Include="ABC.ico" />
-    <Content Include="newGame.wav">
+    <Content Include="Data\words.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="spongebob-fail.wav">
+    <Content Include="Data\newGame.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="tada.wav">
+    <Content Include="Data\spongebob-fail.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\tada.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

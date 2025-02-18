@@ -151,8 +151,7 @@ namespace WordGuessGame
                     DialogResult result = MessageBox.Show($"Такого слова нет в словаре.\n\nХотите добавить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
-                        string filePath = Path.Combine(Application.StartupPath, "words.db");
-                        using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+                        using (FileStream fs = new FileStream(@"Data\words.db", FileMode.Append, FileAccess.Write))
                         using (StreamWriter writer = new StreamWriter(fs))
                         {
                             writer.WriteLine(currentWord);
@@ -250,7 +249,7 @@ namespace WordGuessGame
         {
             if (currentWord == secretWord)
             {
-                SoundPlayer player = new SoundPlayer(@"tada.wav");
+                SoundPlayer player = new SoundPlayer(@"Data\tada.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"Вы угадали слово {currentWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
@@ -258,7 +257,7 @@ namespace WordGuessGame
             }
             if (count == 7)
             {
-                SoundPlayer player = new SoundPlayer(@"spongebob-fail.wav");
+                SoundPlayer player = new SoundPlayer(@"Data\spongebob-fail.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
@@ -269,7 +268,7 @@ namespace WordGuessGame
 
         private void InitializeNewGame()
         {
-            SoundPlayer player = new SoundPlayer(@"newGame.wav");
+            SoundPlayer player = new SoundPlayer(@"Data\newGame.wav");
             player.Play();
             Words words = new Words();
             secretWord = words.GetWord();
