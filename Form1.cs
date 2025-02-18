@@ -8,7 +8,6 @@ namespace WordGuessGame
         private string currentWord;
         private List<String> wordsList;
         private int count = 1;
-        private List<Button> alphabetButtons = new List<Button>();
 
         public Form1()
         {
