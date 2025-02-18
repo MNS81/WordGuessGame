@@ -15,6 +15,12 @@ namespace WordGuessGame
             InitializeNewGame();
         }
 
+        private void Button_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length < 5)
+                textBox1.Text += ((Button)sender).Text;
+        }
+
         private void BackSpaceButton_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length > 0)
@@ -244,7 +250,7 @@ namespace WordGuessGame
         {
             if (currentWord == secretWord)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Windows\\Media\\tada.wav");
+                SoundPlayer player = new SoundPlayer(@"tada.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"Вы угадали слово {currentWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
@@ -252,6 +258,8 @@ namespace WordGuessGame
             }
             if (count == 7)
             {
+                SoundPlayer player = new SoundPlayer(@"spongebob-fail.wav");
+                player.Play();
                 DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) InitializeNewGame();
                 else if (result == DialogResult.No) Application.Exit();
@@ -261,6 +269,8 @@ namespace WordGuessGame
 
         private void InitializeNewGame()
         {
+            SoundPlayer player = new SoundPlayer(@"newGame.wav");
+            player.Play();
             Words words = new Words();
             secretWord = words.GetWord();
             wordsList = words.words;
@@ -359,12 +369,6 @@ namespace WordGuessGame
             Ь.BackColor = Color.LightGray;
             Б.BackColor = Color.LightGray;
             Ю.BackColor = Color.LightGray;
-        }
-
-        private void Button_Click(object sender, EventArgs e)
-        {
-            if (textBox1.Text.Length < 5)
-                textBox1.Text += ((Button)sender).Text;
         }
     }
 }
