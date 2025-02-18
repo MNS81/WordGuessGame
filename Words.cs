@@ -17,7 +17,7 @@ namespace WordGuessGame
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    words.Add(line.ToUpper());
+                    words.Add(line.ToUpper().Replace("Ё", "Е"));
                 }
             }
 
