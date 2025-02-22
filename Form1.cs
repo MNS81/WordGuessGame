@@ -146,24 +146,11 @@ namespace WordGuessGame
                     count++;
                     GameOver();
                 }
-                else if (!wordsList.Contains(currentWord))
+                else
                 {
-                    DialogResult result = MessageBox.Show($"Такого слова нет в словаре.\n\nХотите добавить?", "Внимание!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        using (FileStream fs = new FileStream(@"Data\words.db", FileMode.Append, FileAccess.Write))
-                        using (StreamWriter writer = new StreamWriter(fs))
-                        {
-                            writer.WriteLine(currentWord);
-                        }
-                        wordsList.Add(currentWord);
-                        return;
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        currentWord = String.Empty;
-                        textBox1.Text = String.Empty;
-                    }
+                    MessageBox.Show($"Слова {currentWord} нет в словаре!");
+                    currentWord = String.Empty;
+                    textBox1.Text = String.Empty;
                 }
             }
         }
@@ -251,7 +238,7 @@ namespace WordGuessGame
             {
                 SoundPlayer player = new SoundPlayer(@"Data\Win.wav");
                 player.Play();
-                DialogResult result = MessageBox.Show($"Вы угадали слово {currentWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"Вы угадали слово {secretWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) InitializeNewGame();
                 else if (result == DialogResult.No) Application.Exit();
             }
@@ -259,7 +246,7 @@ namespace WordGuessGame
             {
                 SoundPlayer player = new SoundPlayer(@"Data\Lose.wav");
                 player.Play();
-                DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\nЗагаданное слово - {secretWord}\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) InitializeNewGame();
                 else if (result == DialogResult.No) Application.Exit();
             }
