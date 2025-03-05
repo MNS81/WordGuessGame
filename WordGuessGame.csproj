@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Stats.json" />
     <None Remove="Data\words.db" />
     <None Remove="newGame.wav" />
     <None Remove="spongebob-fail.wav" />
@@ -18,6 +19,9 @@
 
   <ItemGroup>
     <Content Include="ABC.ico" />
+    <Content Include="Data\Stats.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\words.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

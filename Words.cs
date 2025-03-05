@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using static System.Windows.Forms.LinkLabel;
+﻿using System.Text;
 
 namespace WordGuessGame
 {
@@ -10,8 +8,6 @@ namespace WordGuessGame
 
         public string GetWord()
         {
-            //string filePath = Path.Combine(Application.StartupPath, "words.db");
-
             using (StreamReader sr = new StreamReader(@"Data\words.db", Encoding.UTF8))
             {
                 string line;

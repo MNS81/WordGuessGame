@@ -1,4 +1,5 @@
 using System.Media;
+using System.Text.Json;
 
 namespace WordGuessGame
 {
@@ -8,6 +9,8 @@ namespace WordGuessGame
         private string currentWord;
         private List<String> wordsList;
         private int count = 1;
+        private int win;
+        private int lose;
 
         public Form1()
         {
@@ -236,6 +239,8 @@ namespace WordGuessGame
         {
             if (currentWord == secretWord)
             {
+                win += 1;
+                SaveStats();
                 SoundPlayer player = new SoundPlayer(@"Data\Win.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"Вы угадали слово {secretWord}.\nПоздравляю!!!\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo);
@@ -244,6 +249,8 @@ namespace WordGuessGame
             }
             if (count == 7)
             {
+                lose += 1;
+                SaveStats();
                 SoundPlayer player = new SoundPlayer(@"Data\Lose.wav");
                 player.Play();
                 DialogResult result = MessageBox.Show($"К сожалению, вы проиграли :(\nЗагаданное слово - {secretWord}\n\nХотите сыграть еще?", "Игра окончена", MessageBoxButtons.YesNo);
@@ -255,6 +262,10 @@ namespace WordGuessGame
 
         private void InitializeNewGame()
         {
+            string json = File.ReadAllText(@"Data\Stats.json");
+            var stats = JsonSerializer.Deserialize<Dictionary<String, int>>(json);
+            win = stats["wins"];
+            lose = stats["loses"];
             SoundPlayer player = new SoundPlayer(@"Data\NewGame.wav");
             player.Play();
             Words words = new Words();
@@ -359,7 +370,40 @@ namespace WordGuessGame
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Игра «5 букв» или Вордли (от англ. Wordle) – интеллектуальная игра на угадывание существительных из пяти букв за 6 попыток. Игра развивает словарный запас и логику.\nПервоначальную версию игры придумал в 2021 программист Джош Уордл (Josh Wardle), который обожал играть в слова со своей семьей. Игра быстро стала сенсацией. А в мае 2022 году банк Тинькофф запустил версию игры у себя в приложении, где за угадывание слова пользователи получают призы и кешбэк.", "Информация о игре");
+            MessageBox.Show
+                (
+                $"Игра «5 букв» или Вордли (от англ. Wordle) – интеллектуальная игра на угадывание существительных из пяти букв за 6 попыток. " +
+                $"Игра развивает словарный запас и логику.\n" +
+                $"Первоначальную версию игры придумал в 2021 программист Джош Уордл (Josh Wardle), который обожал играть в слова со своей семьей. " +
+                $"Игра быстро стала сенсацией. " +
+                $"А в мае 2022 году банк Тинькофф запустил версию игры у себя в приложении, где за угадывание слова пользователи получают призы и кешбэк.\n\n" +
+                $"Обозначения на игровом поле:\n" +
+                $"\tЗелёная клетка - буква стоит на своём месте.\n" +
+                $"\tЖёлтая клетка - буква есть в слове.\n\n" +
+                $"Обозначения на клавиатуре:\n" +
+                $"\tТёмно серая кнопка - такой буквы в слове нет.\n" +
+                $"\tЖёлтая кнопка - буква есть в слове.\n\n\n\n" +
+                $"\u00A9MNS81 2025", 
+                "Информация о игре"
+                );
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show
+                (
+                $"Побед - {win}\n" +
+                $"Поражений - {lose}\n" +
+                $"Всего игр - {win + lose}\n\n" +
+                $"Процент побед - {Math.Round((double)win / (win + lose) * 100, 1)}%",
+                "Статистика"
+                );
+        }
+
+        private void SaveStats()
+        {
+            var json = JsonSerializer.Serialize(new Dictionary<String, int> { { "wins", win }, { "loses", lose } });
+            File.WriteAllText(@"Data\Stats.json", json);
         }
     }
 }
